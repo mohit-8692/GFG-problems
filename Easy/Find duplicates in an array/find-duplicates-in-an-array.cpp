@@ -5,38 +5,27 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
   public:
-    vector<int> duplicates(int arr[], int n) {
-        // code here
-        unordered_map<int ,int>ans;
-        vector<int>output;
-    
-    //   for (int i = 0; i < n; i++) {
-    //         if (ans[arr[i]]) { // Corrected the condition here
-    //             output.push_back(arr[i]);
-    //         } else {
-    //             ans[arr[i]] = true; // Corrected to set the value to true
-    //         }
-    //     }
-    //     if(output.empty())
-    //         return {-1};
-    //     else
-    //         return output;
+    vector<int> duplicates(int arr[], int n)
+    {
+        unordered_map<int,int>map;
+        vector<int>ans;
+        
         for(int i = 0; i<n; i++)
         {
-            ans[arr[i]]++;
+            map[arr[i]]++;
         }
-        for(auto it: ans)
+        for(auto it: map)
         {
-            if(it.second > 1)
-                output.push_back(it.first);
+            if(it.second >1)
+                ans.push_back(it.first);
         }
-        if(output.empty())
+        if(ans.empty())
             return {-1};
-        else 
-            {
-                sort(output.begin(), output.end());
-                return output;
-            }
+        else
+        {
+            sort(ans.begin(), ans.end());
+            return ans;
+        }
     }
 };
 
