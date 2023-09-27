@@ -21,10 +21,10 @@ class Solution{
                 if(diff < min)
                     min = diff;
             
-            if(sum == x)
-                {
-                    return {x-min};
-                }
+            // if(sum == x)
+            //     {
+            //         return {min};
+            //     }
             else if(sum > x)
                     j--;
                 else i++;
@@ -32,6 +32,7 @@ class Solution{
         return {x-min};
     }
 };
+
 
 //{ Driver Code Starts.
 
