@@ -39,27 +39,18 @@ class Solution
 {
     public:
     //Function to check if two trees are identical.
-    bool isIdentical(Node *r1, Node *r2)
+    bool isIdentical(Node *root1, Node *root2)
     {
-        //Your Code here
-        if (r1 == NULL && r2 == NULL)
-            return 1;
-        if(r1 == NULL && r2 != NULL)
-            return 0;
-        if(r1 != NULL && r2 == NULL)
-            return 0;
+        if(root1 && root2)
+        {
+            if(root1 ->data != root2->data)
+                return false;
+            else return isIdentical(root1 ->left, root2 ->left) && isIdentical(root1 ->right,root2->right);
             
-        bool left = isIdentical(r1 ->left, r2 ->left);
-        bool right = isIdentical(r1 ->right, r2 ->right);
-        bool cond = r1->data == r2 ->data;
-        
-        if (left && right && cond)
-            return true;
-        else    return false;
-
-        
-        
-        
+        }
+        else if(root1 || root2)
+            return false;
+            else return true;
     }
 };
 
