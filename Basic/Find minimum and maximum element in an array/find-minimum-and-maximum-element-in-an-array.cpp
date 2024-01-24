@@ -23,21 +23,17 @@ int main() {
 // } Driver Code Ends
 
 
-pair<long long, long long> getMinMax(long long a[], int n) {
-    pair<long long, long long>ans;
+pair<long long, long long> getMinMax(long long arr[], int n) {
+    int min = INT_MAX;
+    long long max = -1;
     
-    long long max = a[0];
-    long long min = a[0];
-    
-    for(int i = 0; i<n; i++)
+    for(int i = 0; i< n; i++)
     {
-        if(a[i] > max)
-            max = a[i];
-        
-        if(a[i]< min)
-            min = a[i];
+        if(arr[i] > max)
+            max = arr[i];
+        if(arr[i] < min)
+            min = arr[i];
     }
-    ans.first = min;
-    ans.second = max;
-    return ans;
+    return {min,max};
+    
 }
