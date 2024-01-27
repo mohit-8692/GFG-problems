@@ -11,18 +11,26 @@ class Solution {
   public:
     int getMinDiff(int arr[], int n, int k) {
         // code here
-             sort(arr,arr+n);
-       int minele,maxele;
-       int result=arr[n-1]-arr[0];
-       
-       for(int i=1;i<n;i++){
-           if(arr[i]>=k){
-               maxele=max(arr[i-1]+k,arr[n-1]-k);
-               minele=min(arr[0]+k,arr[i]-k);
-               result=min(result,maxele-minele);
-           }
-       }
-       return result;
+    
+        sort(arr, arr+n);
+        
+        int mi, ma;
+        int ans = arr[n-1] -arr[0];
+        
+        int largest = arr[n-1]-k;
+        int smallest = arr[0]+k ;
+        
+        for(int i=0; i<n; i++)
+        {
+            mi = min(smallest, arr[i+1]-k);
+            ma= max(largest, arr[i]+k);
+            
+            if(mi <0)
+                continue;
+            ans = min(ans,ma-mi);
+        }
+        return ans;
+                
     }
 };
 
