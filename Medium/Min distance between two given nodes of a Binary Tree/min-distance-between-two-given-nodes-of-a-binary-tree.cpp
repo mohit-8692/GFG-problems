@@ -93,62 +93,34 @@ struct Node
     Node* left, * right;
 }; */
 
-class Solution {
-public:
-    void buildGraph(Node* root, unordered_map<int, vector<int>>& adj) {
-        if(root == NULL) {
+class Solution{
+    public:
+    /* Should return minimum distance between a and b
+    in a tree with given root*/
+    void help(Node*root, int a, int b, vector<int>&currpath, vector<int>&pathA,vector<int>&pathB)
+    {
+        if(root == NULL)
             return;
-        }
-        
-        if(root->left) {
-            adj[root->data].push_back(root->left->data);
-            adj[root->left->data].push_back(root->data);
-        }
-        
-        if(root->right) {
-            adj[root->data].push_back(root->right->data);
-            adj[root->right->data].push_back(root->data);
-        }
-        
-        buildGraph(root->left, adj);
-        buildGraph(root->right, adj);
+        currpath.push_back(root->data);
+        if(root ->data == a)pathA = currpath;
+        if(root ->data == b)pathB = currpath;
+        help(root -> left,a,b,currpath,pathA,pathB);
+        help(root -> right, a,b,currpath,pathA,pathB);
+        currpath.pop_back();
     }
     
     int findDist(Node* root, int a, int b) {
-        // Build Graph 
-        unordered_map<int, vector<int>> adj;
-        buildGraph(root, adj);
-        
-        // Perform BFS 
-        queue<int> q;
-        unordered_set<int> st;
-        
-        q.push(a);
-        st.insert(a);
-        
-        int cnt = 0;
-        
-        while(!q.empty()) {
-            int sz = q.size();
-            for(int i = 0; i < sz; i++) {
-                int curr = q.front();
-                q.pop();
-                
-                if(curr == b) {
-                    return cnt;
-                }
-                
-                for(auto it : adj[curr]) {
-                    if(st.find(it) == st.end()) {
-                        q.push(it);
-                        st.insert(it); 
-                    }
-                }
-            }
-            cnt++;
+        // Your code here
+        vector<int>pathA,pathB,currpath;
+        help(root,a,b,currpath,pathA,pathB);
+        int i = 0, j = 0;
+        while(i<pathA.size() && j<pathB.size())
+        {
+            if(pathA[i] != pathB[j])
+                break;
+            i++;j++;
         }
-        
-        return -1;
+        return pathA.size()-i+pathB.size()-j;
     }
 };
 
